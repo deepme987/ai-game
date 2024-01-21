@@ -1,13 +1,27 @@
+'use client';
 import Link from 'next/link';
 
 export default function JoinGame() {
+
+  const movetopage = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // get sessionId from input
+    const sessionId = (document.getElementById('gameCode') as HTMLInputElement).value;
+    // go to game-session/[sessionId]
+    // generate random number for now
+    const userID = Math.floor(Math.random() * 1000000);
+    window.location.href = `/game-session/${sessionId}/${userID}`;
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-transparent to-background-end p-6">
       <div className="w-full max-w-md rounded-lg bg-background-start p-8 shadow-lg">
         <h2 className="text-2xl font-bold text-foreground">Join a Game</h2>
         <p className="mt-2 text-foreground">Enter the code to join an existing game.</p>
 
-        <form className="mt-6">
+        <form className="mt-6" onSubmit={
+          movetopage
+        }>
           <div className="mb-4">
             <label htmlFor="gameCode" className="block mb-2 text-sm font-medium text-foreground">
               Game Code
