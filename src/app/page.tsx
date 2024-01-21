@@ -27,11 +27,11 @@ export default function Home() {
               Join a Game
             </p>
           </Link>
-          <button onClick={hostAndStartGame}>
-            <p className="block rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-8 shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
-              Host a Game
-            </p>
-          </button>
+          {/*<button onClick={hostAndStartGame}>*/}
+          {/*  <p className="block rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-8 shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">*/}
+          {/*    Host a Game*/}
+          {/*  </p>*/}
+          {/*</button>*/}
         </div>
       </div>
     </main>
