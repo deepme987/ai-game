@@ -7,14 +7,17 @@ type ResponseData = {
 
 const data: {
     [key: string]: {
-        players: {
-            [key: string]: User
-        }
+
         started: boolean
-        currentprompt: string
-        currentoptions: string[]
-        currentresponses: {
-            [key: string]: string
+        gameData: {
+            users: {
+                [key: string]: User
+            }
+            currentPrompt: string
+            currentOptions: string[]
+            currentResponses: {
+                [key: string]: string
+            }
         }
     }   
 }
@@ -44,14 +47,14 @@ if (!playerId) {
         // get player name from body
         const playerName = req.body.playerName;
         // add player to session
-        data[sessionId].players[playerId] = {
+        data[sessionId].gameData.users[playerId] = {
             id: playerId,
             name: playerName
         }
 
         const response = req.body.response;
 
-        data[sessionId].currentresponses[playerId] = response;
+        data[sessionId].gameData.currentResponses[playerId] = response;
 
     }
 
@@ -62,14 +65,12 @@ if (!playerId) {
         // get options from body
         const options = req.body.options;
         // update session prompt and options
-        data[sessionId].currentprompt = prompt;
-        data[sessionId].currentoptions = options;
+        data[sessionId].gameData.currentPrompt = prompt;
+        data[sessionId].gameData.currentOptions = options;
 
         // clear responses
-        data[sessionId].currentresponses = {};
+        data[sessionId].gameData.currentResponses = {};
     }
-
-
 
     return data[sessionId];
 
