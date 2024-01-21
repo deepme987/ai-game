@@ -23,8 +23,8 @@ if (!sessionId) {
     return;
 }
 // get player id from url
-const playerId = req.query.playerId as string;
-if (!playerId) {
+const userId = req.query.userId as string;
+if (!userId) {
     res.status(400).json({ message: 'No player id provided' })
     return;
 }
@@ -34,14 +34,14 @@ if (!playerId) {
         // get player name from body
         const playerName = req.body.playerName;
         // add player to session
-        data[sessionId].gameData.users[playerId] = {
-            id: playerId,
+        data[sessionId].gameData.users[userId] = {
+            id: userId,
             name: playerName
         }
 
         const response = req.body.response;
 
-        data[sessionId].gameData.currentResponses[playerId] = response;
+        data[sessionId].gameData.currentResponses[userId] = response;
 
     }
 

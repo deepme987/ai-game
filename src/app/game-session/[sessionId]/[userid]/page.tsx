@@ -1,17 +1,10 @@
 'use client';
 import PlayersList from "@/app/game-session/[sessionId]/[userid]/players-list";
 import GamePage from "@/app/game-session/[sessionId]/[userid]/game-page";
-import { GameData } from "@/types";
-
-// Sample data for the list of users. In a real app, this would come from state or props.
-const dummy_users = [
-  { id: 1, name: 'PlayerOne' },
-  { id: 2, name: 'PlayerTwo' },
-  { id: 3, name: 'PlayerThree' },
-];
 
 export default function GameSessionPage() {  // Function to handle the removal of users. Placeholder for now.
 
+  // TODO: replace this with actual data from the server
   const data = {
     started: false,
     gameData: {
