@@ -2,6 +2,16 @@ import { GameData, User } from '@/types'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import type { NextApiRequest, NextApiResponse } from 'next'
  
+
+const empty: string = JSON.stringify({
+    started: false,
+    gameData: {
+        currentPrompt: '',
+        currentOptions: [],
+        currentResponses: {},
+        users: {}
+    }
+});
 // get and store data
 type Data = {
     [key: string]: GameData
@@ -11,32 +21,25 @@ const getItem = (id: string) => {
     // write to file system
     if (!existsSync(id+'.json')) {
         // create file
-        writeFileSync(id+'.json', '{}', 'utf-8');
+        writeFileSync(id+'.json', empty, 'utf-8');
     }
     return readFileSync(id+'.json', 'utf-8');
 }
 
 const setItem = (id: string, data: string) => {
-    writeFileSync(id+'.json', data, 'utf-8');
+    writeFileSync(id+'.json', data??empty, 'utf-8');
 }
 
 const storedata = (id: string, data: GameData) => {
-    if (getItem(id) === null) {
-        setItem(id, JSON.stringify({}));
-    }
-    
     setItem(id, JSON.stringify(data));
 }
 
 const getdata = (id: string) => {
-    if (getItem(id) === null) {
-        setItem(id, JSON.stringify({}));
-    }
-    const ldata = JSON.parse(getItem(id) || '{}');
+    const ldata = JSON.parse(getItem(id) || empty);
     return ldata;
 }
  
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<GameData | { message: string }>
 ) {
@@ -63,29 +66,19 @@ export default function handler(
         const playerName = req.body.playerName;
 
         // if session doesn't exist create it
-        if (!data[sessionId]) {
-            data[sessionId] = {
-                started: false,
-                gameData: {
-                    currentPrompt: '',
-                    currentOptions: [],
-                    currentResponses: {},
-                    users: {}
-                }
-            }
-        }
+        
         // add player to session
-        data[sessionId].gameData.users[userId] = {
+        data.gameData.users[userId] = {
             id: userId,
             name: playerName
         }
 
         const response = req.body.response;
 
-        data[sessionId].gameData.currentResponses[userId] = response;
+        data.gameData.currentResponses[userId] = response;
 
         // store data
-        storedata(sessionId, data[sessionId]);
+        storedata(sessionId, data);
 
     }
 
@@ -96,21 +89,21 @@ export default function handler(
         // get options from body
         const options = req.body.options;
         // update session prompt and options
-        data[sessionId].gameData.currentPrompt = prompt;
-        data[sessionId].gameData.currentOptions = options;
+        data.gameData.currentPrompt = prompt;
+        data.gameData.currentOptions = options;
 
         // clear responses
-        data[sessionId].gameData.currentResponses = {};
+        data.gameData.currentResponses = {};
 
         // store data
-        storedata(sessionId, data[sessionId]);
+        storedata(sessionId, data);
     }
-    console.log(data[sessionId]);
+    console.log(data);
     console.log(data)
     // store data
-    storedata(sessionId, data[sessionId]);
+    storedata(sessionId, data);
     // respond with session data
-    res.send(data[sessionId])
-    return;
+    res.end(JSON.stringify(data.gameData));
+    return data;
 
 }
