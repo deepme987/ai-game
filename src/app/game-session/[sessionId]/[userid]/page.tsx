@@ -1,6 +1,7 @@
 'use client';
 import PlayersList from "@/app/game-session/[sessionId]/[userid]/players-list";
 import GamePage from "@/app/game-session/[sessionId]/[userid]/game-page";
+import { GameData } from "@/types";
 
 export default function GameSessionPage() {  // Function to handle the removal of users. Placeholder for now.
 
@@ -29,6 +30,6 @@ export async function loader({ params: { sessionId , userid } }: { params: { ses
 
 // Mock function to simulate fetching users from a database or API
 async function fetchUsersForSession(sessionId: number, userid: number) {
-  const res = fetch("/api/game/&playerId=" + userid + "&sessionId=" + sessionId).then((res) => res.json());
+  const res = fetch("/api/game/&userId=" + userid + "&sessionId=" + sessionId).then((res) => res.json());
   return res
 }

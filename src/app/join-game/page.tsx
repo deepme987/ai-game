@@ -13,9 +13,18 @@ export default function JoinGame() {
 
     const name = (document.getElementById('name') as HTMLInputElement).value;
 
+    //post request to server /api/game/&userId=" + userid + "&sessionId=" + sessionId & playerName=" + name
 
-    
-    window.location.href = `/game-session/${sessionId}/${userID}`;
+    fetch("/api/game?userId=" + userID + "&sessionId=" + sessionId + "&playerName=" + name,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    } 
+      ).then((res) => res.json()).then(()=>
+      {window.location.href = `/game-session/${sessionId}/${userID}`;}
+    );
   }
 
   return (
