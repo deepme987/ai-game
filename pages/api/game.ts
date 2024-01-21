@@ -1,4 +1,4 @@
-import { User } from '@/types'
+import { GameData, User } from '@/types'
 import type { NextApiRequest, NextApiResponse } from 'next'
  
 type ResponseData = {
@@ -6,20 +6,7 @@ type ResponseData = {
 }
 
 const data: {
-    [key: string]: {
-
-        started: boolean
-        gameData: {
-            users: {
-                [key: string]: User
-            }
-            currentPrompt: string
-            currentOptions: string[]
-            currentResponses: {
-                [key: string]: string
-            }
-        }
-    }   
+    [key: string]: GameData  
 }
 = {
 

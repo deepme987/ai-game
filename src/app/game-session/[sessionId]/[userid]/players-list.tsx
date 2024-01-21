@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function PlayersList({ users }: { users: User[] ; }) {
 
-  const removeUser = (userId: number) => {
+  const removeUser = (userId: string) => {
     console.log(`Remove user with ID: ${userId}`);
     // Implement user removal logic here
   };
@@ -15,6 +15,8 @@ export default function PlayersList({ users }: { users: User[] ; }) {
     console.log('Game started!');
     // Implement game start logic here
   };
+
+  
 
   return (
   <>

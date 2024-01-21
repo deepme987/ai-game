@@ -10,6 +10,11 @@ export default function JoinGame() {
     // go to game-session/[sessionId]
     // generate random number for now
     const userID = Math.floor(Math.random() * 1000000);
+
+    const name = (document.getElementById('name') as HTMLInputElement).value;
+
+
+    
     window.location.href = `/game-session/${sessionId}/${userID}`;
   }
 
@@ -31,6 +36,18 @@ export default function JoinGame() {
               id="gameCode"
               className="w-full rounded-md bg-background-start border-transparent p-2 text-black shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
               placeholder="Enter code here"
+            />
+          </div>
+          {/* name */}
+          <div className="mb-4">
+            <label htmlFor="name" className="block mb-2 text-sm font-medium text-foreground">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="w-full rounded-md bg-background-start border-transparent p-2 text-black shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              placeholder="Enter name here"
             />
           </div>
 

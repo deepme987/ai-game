@@ -1,6 +1,7 @@
 'use client';
-import PlayersList from "@/app/game-session/[sessionId]/players-list";
-import GamePage from "@/app/game-session/[sessionId]/game-page";
+import PlayersList from "@/app/game-session/[sessionId]/[userid]/players-list";
+import GamePage from "@/app/game-session/[sessionId]/[userid]/game-page";
+import { GameData } from "@/types";
 
 // Sample data for the list of users. In a real app, this would come from state or props.
 const dummy_users = [
@@ -26,20 +27,15 @@ export default function GameSessionPage() {  // Function to handle the removal o
 }
 
 
-export async function loader({ params: { sessionId } } : { params: { sessionId: number } }) {
+export async function loader({ params: { sessionId , userid } }: { params: { sessionId: number , userid: number } }) {
   // Fetch the session data using params.sessionId
-  const users = await fetchUsersForSession(sessionId);
+  const users = await fetchUsersForSession(sessionId, userid) as Promise<GameData> 
+  console.log(users);
   return { data: { sessionId: sessionId, users } };
 }
 
 // Mock function to simulate fetching users from a database or API
-async function fetchUsersForSession(sessionId: number) {
-  console.log(`Fetching users for session: ${sessionId}`);
-  // Replace with your actual fetch call
-  return [
-    { id: 1, name: 'PlayerOne' },
-    { id: 2, name: 'PlayerTwo' },
-    { id: 3, name: 'PlayerThree' },
-    // ... more users
-  ];
+async function fetchUsersForSession(sessionId: number, userid: number) {
+  const res = fetch("/api/game/&playerId=" + userid + "&sessionId=" + sessionId).then((res) => res.json());
+  return res
 }
