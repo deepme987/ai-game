@@ -1,17 +1,19 @@
 import {User} from "@/types";
 import Link from "next/link";
 
-// Players list function to render before game starts
-
 
 export default function PlayersList({ users }: { users: User[] ; }) {
 
-  const removeUser = (userId: number) => {
+  // TODO: refresh users list from server every 1 second
+
+  const removeUser = (userId: string) => {
+    // TODO: fetch from server
     console.log(`Remove user with ID: ${userId}`);
     // Implement user removal logic here
   };
 
   const startGame = () => {
+    // TODO: fetch from server and redirect to /game-session/[sessionId]/[userid]
     console.log('Game started!');
     // Implement game start logic here
   };

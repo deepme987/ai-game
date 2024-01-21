@@ -4,6 +4,7 @@ import GamePage from "@/app/game-session/[sessionId]/[userid]/game-page";
 
 export default function GameSessionPage() {  // Function to handle the removal of users. Placeholder for now.
 
+  // TODO: replace this with actual data from the server
   const data = {
     started: false,
     gameData: {
