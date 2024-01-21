@@ -29,7 +29,7 @@ export default function JoinGame() {
             </button>
 
             <Link href="/">
-              <p className="rounded-lg border border-transparent px-4 py-2 text-foreground hover:bg-background-start focus:outline-none focus:ring focus:ring-background-end focus:ring-opacity-50">
+              <p className="rounded-lg border border-transparent px-4 py-2 text-foreground hover:bg-background-start focus:outline-none focus:ring focus:ring-background-end focus:ring-opacity-50 bg-gray-200 hover:bg-gray-300 text-black">
                 Back
               </p>
             </Link>
