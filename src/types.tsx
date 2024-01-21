@@ -3,17 +3,19 @@ export interface User {
   name: string;
 }
 
-export type GameData = {
+export type GameDataProps = {
 
   started: boolean
-  gameData: {
-      users: {
-          [key: string]: User
-      }
-      currentPrompt: string
-      currentOptions: string[]
-      currentResponses: {
-          [key: string]: string
-      }
+  gameData: GameData
+}
+
+export type GameData = {
+  users: {
+    [key: string]: User
   }
-} 
+  currentPrompt: string
+  currentOptions: string[]
+  currentResponses: {
+    [key: string]: string
+  }
+}
