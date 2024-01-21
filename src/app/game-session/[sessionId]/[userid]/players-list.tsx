@@ -3,6 +3,7 @@ import Link from "next/link";
 
 // Players list function to render before game starts
 
+
 export default function PlayersList({ users }: { users: User[] ; }) {
 
   const removeUser = (userId: number) => {
