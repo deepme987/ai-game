@@ -1,7 +1,13 @@
-import Image from "next/image";
+'use client';
 import Link from "next/link";
 
 export default function Home() {
+  const hostAndStartGame = () => {
+    const sessionId = Math.floor(Math.random() * 1000000);
+    document.cookie = `sessionId=${sessionId}`;
+    window.location.href = `/game-session/${sessionId}`;
+    console.log('Game hosted: ' + sessionId);
+  }
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-6 lg:p-24">
       <div className="z-10 max-w-5xl w-full text-center font-mono text-sm lg:flex lg:justify-center">
@@ -21,11 +27,11 @@ export default function Home() {
               Join a Game
             </p>
           </Link>
-          <Link href="/host-game">
+          <button onClick={hostAndStartGame}>
             <p className="block rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-8 shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
               Host a Game
             </p>
-          </Link>
+          </button>
         </div>
       </div>
     </main>

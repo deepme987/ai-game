@@ -1,7 +1,5 @@
 'use client';
 import Link from 'next/link';
-import useLoaderData from 'next/app';
-
 import {User} from '@/types';
 
 // Sample data for the list of users. In a real app, this would come from state or props.
