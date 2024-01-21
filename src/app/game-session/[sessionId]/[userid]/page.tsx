@@ -1,15 +1,18 @@
 'use client';
 import PlayersList from "@/app/game-session/[sessionId]/[userid]/players-list";
 import GamePage from "@/app/game-session/[sessionId]/[userid]/game-page";
-import { GameData } from "@/types";
+import {GameDataProps} from "@/types";
 
 export default function GameSessionPage() {  // Function to handle the removal of users. Placeholder for now.
 
   // TODO: replace this with actual data from the server
   const data = {
-    started: false,
+    started: true,
     gameData: {
       users: [],
+      currentPrompt: "What is your favorite color?",
+      currentOptions: ["Red", "Green", "Blue"],
+      currentResponses: {},
     }
   }
 
@@ -23,7 +26,7 @@ export default function GameSessionPage() {  // Function to handle the removal o
 
 export async function loader({ params: { sessionId , userid } }: { params: { sessionId: number , userid: number } }) {
   // Fetch the session data using params.sessionId
-  const users = await fetchUsersForSession(sessionId, userid) as Promise<GameData> 
+  const users = await fetchUsersForSession(sessionId, userid) as Promise<GameDataProps>
   console.log(users);
   return { data: { sessionId: sessionId, users } };
 }
