@@ -15,7 +15,7 @@ export default function JoinGame() {
             <input
               type="text"
               id="gameCode"
-              className="w-full rounded-md bg-background-start border-transparent p-2 text-foreground shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              className="w-full rounded-md bg-background-start border-transparent p-2 text-black shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
               placeholder="Enter code here"
             />
           </div>
